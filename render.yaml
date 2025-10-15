@@ -1,0 +1,23 @@
+services:
+  - type: web
+    name: telegram-bot
+    env: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: gunicorn app:app
+    envVars:
+      - key: TELEGRAM_TOKEN
+        fromDatabase:
+          name: telegram-bot-db
+          key: TELEGRAM_TOKEN
+      - key: NEWS_API_KEY
+        fromDatabase:
+          name: telegram-bot-db
+          key: NEWS_API_KEY
+      - key: NOWPAYMENTS_API_KEY
+        fromDatabase:
+          name: telegram-bot-db
+          key: NOWPAYMENTS_API_KEY
+      - key: VIP_FILE
+        fromDatabase:
+          name: telegram-bot-db
+          key: VIP_FILE
